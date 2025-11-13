@@ -1,0 +1,51 @@
+version: '3.8'
+
+services:
+  # WAHA - WhatsApp HTTP API
+  waha:
+    image: devlikeapro/waha
+    container_name: waha
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    environment:
+      - WAHA_LOG_LEVEL=info
+    volumes:
+      - waha_data:/app/.wwebjs_auth
+      - waha_cache:/app/.wwebjs_cache
+    networks:
+      - automation-network
+
+  # n8n (Opcional - pode usar n8n Cloud)
+  # Descomente se quiser rodar n8n localmente
+  # n8n:
+  #   image: n8nio/n8n
+  #   container_name: n8n
+  #   restart: unless-stopped
+  #   ports:
+  #     - "5678:5678"
+  #   environment:
+  #     - N8N_BASIC_AUTH_ACTIVE=true
+  #     - N8N_BASIC_AUTH_USER=admin
+  #     - N8N_BASIC_AUTH_PASSWORD=admin123
+  #     - N8N_HOST=localhost
+  #     - N8N_PORT=5678
+  #     - N8N_PROTOCOL=http
+  #     - NODE_ENV=production
+  #     - WEBHOOK_URL=http://localhost:5678/
+  #   volumes:
+  #     - n8n_data:/home/node/.n8n
+  #   networks:
+  #     - automation-network
+
+volumes:
+  waha_data:
+    driver: local
+  waha_cache:
+    driver: local
+  # n8n_data:
+  #   driver: local
+
+networks:
+  automation-network:
+    driver: bridge

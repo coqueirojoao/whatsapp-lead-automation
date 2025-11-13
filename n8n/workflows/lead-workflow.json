@@ -1,0 +1,170 @@
+{
+  "name": "Lead Capture WhatsApp",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "lead-capture",
+        "responseMode": "onReceived",
+        "options": {}
+      },
+      "id": "webhook-node",
+      "name": "Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [250, 300],
+      "webhookId": "lead-capture"
+    },
+    {
+      "parameters": {
+        "values": {
+          "string": [
+            {
+              "name": "nome",
+              "value": "={{ $json.nome }}"
+            },
+            {
+              "name": "email",
+              "value": "={{ $json.email }}"
+            },
+            {
+              "name": "telefone",
+              "value": "={{ $json.telefone }}"
+            },
+            {
+              "name": "interesse",
+              "value": "={{ $json.interesse }}"
+            },
+            {
+              "name": "data",
+              "value": "={{ $now.format('DD/MM/YYYY HH:mm:ss') }}"
+            },
+            {
+              "name": "origem",
+              "value": "typebot"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "set-node",
+      "name": "Processar Dados",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 1,
+      "position": [450, 300]
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "sheetId": "CONFIGURAR_ID_DA_PLANILHA",
+        "range": "A:F",
+        "options": {
+          "valueInputMode": "USER_ENTERED"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "nome": "={{ $json.nome }}",
+            "email": "={{ $json.email }}",
+            "telefone": "={{ $json.telefone }}",
+            "interesse": "={{ $json.interesse }}",
+            "data": "={{ $json.data }}",
+            "origem": "={{ $json.origem }}"
+          }
+        }
+      },
+      "id": "google-sheets-node",
+      "name": "Salvar no Google Sheets",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4,
+      "position": [650, 200],
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "CONFIGURAR_CREDENCIAL_GOOGLE",
+          "name": "Google Sheets OAuth2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "http://localhost:3000/api/sendText",
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "session",
+              "value": "default"
+            },
+            {
+              "name": "chatId",
+              "value": "CONFIGURAR_SEU_NUMERO@c.us"
+            },
+            {
+              "name": "text",
+              "value": "🔔 *Novo Lead Recebido!*\\n\\n👤 *Nome:* {{ $json.nome }}\\n📧 *Email:* {{ $json.email }}\\n📱 *Telefone:* {{ $json.telefone }}\\n🎯 *Interesse:* {{ $json.interesse }}\\n🕐 *Data:* {{ $json.data }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "http-request-node",
+      "name": "Enviar WhatsApp (WAHA)",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [650, 400]
+    }
+  ],
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Processar Dados",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Processar Dados": {
+      "main": [
+        [
+          {
+            "node": "Salvar no Google Sheets",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Enviar WhatsApp (WAHA)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [
+    {
+      "name": "leads",
+      "id": "lead-tag"
+    },
+    {
+      "name": "whatsapp",
+      "id": "whatsapp-tag"
+    },
+    {
+      "name": "automation",
+      "id": "automation-tag"
+    }
+  ],
+  "meta": {
+    "instanceId": "configurar-na-importacao"
+  },
+  "pinData": {},
+  "versionId": "1.0.0"
+}

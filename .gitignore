@@ -1,0 +1,59 @@
+# Node modules
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Environment variables
+.env
+.env.local
+.env.production
+.env.development
+
+# Docker
+docker/data/
+docker/logs/
+
+# n8n
+.n8n/
+n8n-data/
+
+# Credentials e Secrets
+credentials.json
+secrets/
+*.key
+*.pem
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Logs
+logs/
+*.log
+
+# Temporary files
+tmp/
+temp/
+*.tmp
+
+# Backups
+*.backup
+*.bak
+
+# WhatsApp session data
+waha-sessions/
+.wwebjs_auth/
+.wwebjs_cache/
+
+# Google Sheets credentials (se aplicável)
+google-credentials.json
+service-account.json

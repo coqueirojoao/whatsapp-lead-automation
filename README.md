@@ -1,10 +1,10 @@
 # WhatsApp Lead Automation
 
-Sistema completo de automação para captura de leads através de chatbot com notificações via WhatsApp.
+Sistema de automação end-to-end para captura e qualificação de leads com notificações em tempo real via WhatsApp.
 
 ## Sobre o Projeto
 
-Este projeto integra TypeBot, n8n e WAHA (WhatsApp HTTP API) para criar um sistema automatizado de atendimento e captura de leads. Quando um visitante interage com o chatbot, os dados são processados automaticamente e você recebe uma notificação no WhatsApp.
+Solução completa de automação que integra TypeBot, n8n e WAHA (WhatsApp HTTP API) para criar um sistema de atendimento e captura de leads. O sistema processa dados automaticamente, armazena em Google Sheets e envia notificações instantâneas via WhatsApp quando um visitante interage com o chatbot.
 
 ## Tecnologias Utilizadas
 
@@ -96,51 +96,22 @@ Detalhes de configuração de cada componente em [docs/setup-guide.md](docs/setu
 4. Os dados serão salvos automaticamente no Google Sheets
 5. Você receberá uma notificação no WhatsApp
 
-## Demonstração
-
-_Screenshots e vídeos serão adicionados em breve_
-
 ## Casos de Uso
 
 - 💼 Captura de leads para vendas
 - 🎯 Qualificação de prospects
 - 📊 Pesquisas de satisfação
 - 🤖 Atendimento automatizado
-- 📈 Agendamento de reuniões
+- 📈 Agendamento de consultorias
 
-## Custos
+## Benefícios
 
-Este projeto é **100% gratuito**:
-- TypeBot: Plano gratuito (200 chats/mês)
-- n8n Cloud: Tier gratuito (200 execuções/mês)
-- WAHA: Open-source gratuito
-- Google Sheets: Gratuito
-
-## Roadmap
-
-- [ ] Setup inicial do projeto
-- [ ] Configuração WAHA
-- [ ] Criação do chatbot TypeBot
-- [ ] Workflow n8n completo
-- [ ] Integração Google Sheets
-- [ ] Integração WhatsApp
-- [ ] Documentação completa
-- [ ] Screenshots e demonstrações
-
-## Contribuindo
-
-Contribuições são bem-vindas! Sinta-se à vontade para abrir issues ou pull requests.
+- **Resposta Instantânea**: Notificações em tempo real via WhatsApp
+- **Centralização**: Todos os leads armazenados em Google Sheets
+- **Escalável**: Suporta centenas de conversas simultâneas
+- **Gratuito**: Utiliza apenas ferramentas com tier gratuito ou open-source
+- **Sem Código**: Configuração visual, sem necessidade de programação
 
 ## Licença
 
-Este projeto é open-source e está disponível sob a licença MIT.
-
-## Autor
-
-Desenvolvido como projeto de demonstração para automação de processos com ferramentas no-code/low-code.
-
-## Agradecimentos
-
-- [TypeBot](https://typebot.io) - Plataforma de chatbot
-- [n8n](https://n8n.io) - Plataforma de automação
-- [WAHA](https://waha.devlike.pro) - WhatsApp API
+Este projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE) para mais detalhes.

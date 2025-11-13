@@ -8,6 +8,8 @@ services:
     restart: unless-stopped
     ports:
       - "3000:3000"
+    env_file:
+      - .env
     environment:
       - WAHA_LOG_LEVEL=info
     volumes:
